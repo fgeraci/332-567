@@ -1,4 +1,4 @@
-package edu.rutgers.components;
+package edu.rutgers.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
