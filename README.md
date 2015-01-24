@@ -1,2 +1,11 @@
 # 332-567
-332:568
+
+
+Spring 2015 - 332:567 Project - Stock Predictor Web App
+-------------------------------------------------------
+
+
+PARTICIPANTS:
+	
+		Valia Kalokyri
+		Fernando Geraci
