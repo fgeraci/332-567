@@ -18,5 +18,6 @@ IMPLEMENTATION OVERVIEW:
 	Ideally, just for the skeleton, it will be useful to keep the scope as humble as possible hence I haven't
 	created many packages yet but the essentials (model, view and controllers).
 	
-	As per web.xml configuration; we are using Spring as the framework. There will be a main Request 	Dispatcher at the root (could be changed at any time) and for testing purposes a MainController which
-	ideally it will just instantiate basic apps resources and configurations.
+	As per web.xml configuration; we are using Spring as the framework. There will be a main RequestDispatcher 
+	at the root 	(could be changed at any time) and for testing purposes a MainController which ideally it will 
+	just instantiate basic apps resources and configurations.
