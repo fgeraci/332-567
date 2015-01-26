@@ -5,7 +5,13 @@ import java.util.Properties;
 public class ConfigReader {
 	
 	public enum PROPERTIES {
-		LOGGER("logger");
+		
+		LOGGER("logger"),
+		DB_CONNECTION("db_connection"),
+		DB_NAME("db_name"),
+		DB_USER("db_user"),
+		DB_PASSWORD("db_password");
+		
 		private String strVal;
 		private PROPERTIES(final String pstrVal) {
 			strVal = pstrVal;

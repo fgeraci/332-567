@@ -20,9 +20,9 @@ public class LoggerFactory {
 	public static Logger getLogger(final LOGGER_TYPE penmLoggerType) {
 		switch(penmLoggerType) {
 		case CONSOLE:
-			return new ConsoleLogger();
+			return ConsoleLogger.getInstance();
 		case TEXT:
-			return new TextLogger();
+			return TextLogger.getInstance();
 		default:
 			return null;
 		}
@@ -31,20 +31,19 @@ public class LoggerFactory {
 	/**
 	 * Implements Logger, logs to a text file specified in the app.properties file.
 	 */
-	private static class TextLogger implements Logger {
+	private static class TextLogger extends Logger {
 
-		protected TextLogger() {
-			// TODO - implement initialization of text properties here
+		private static Logger instance;
+		
+		public static Logger getInstance() {
+			if(TextLogger.instance == null) {
+				TextLogger.instance = new TextLogger();
+			}
+			return TextLogger.instance;
 		}
 		
-		public void log(String pstrMessage) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void log(String pstrMessage, LOG_TYPE penmType) {
-			// TODO Auto-generated method stub
-			
+		protected TextLogger() {
+			// TODO - implement initialization of text properties here
 		}
 		
 	}
@@ -52,28 +51,26 @@ public class LoggerFactory {
 	/**
 	 * Implements Logger. Simply logs to console during the application's runtime.
 	 */
-	private static class ConsoleLogger implements Logger {
+	private static class ConsoleLogger extends Logger {
 
+		private static Logger instance;
+		
+		public static Logger getInstance() {
+			if(ConsoleLogger.instance == null) {
+				ConsoleLogger.instance = new ConsoleLogger();
+			}
+			return ConsoleLogger.instance;
+		}
 		
 		protected ConsoleLogger() {
 			System.out.println(LOG_TYPE.GRAL.strVal+"Console log initialized");
-		}
-		
-		public void log(String pstrMessage) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void log(String pstrMessage, LOG_TYPE penmType) {
-			// TODO Auto-generated method stub
-			
 		}
 	}
 	
 	/**
 	 * Permits logging messages to different sources depending on the instance invoked which implements this interface. 
 	 */
-	public static interface Logger {
+	public static abstract class Logger {
 		
 		/**
 		 * Type of message to be logged.
@@ -95,14 +92,31 @@ public class LoggerFactory {
 		 * Logs a message with GENERAL default type.
 		 * @param pstrMessage
 		 */
-		public void log(final String pstrMessage);
-		
+		public void log(String pstrMessage) {
+			System.out.println(Utilities.getDataStampString()+" - "+LOG_TYPE.GRAL.strVal+pstrMessage);
+		}
+
 		/**
 		 * Logs a messages with the specified type.
 		 * @param pstrMessage
 		 * @param penmType
 		 */
-		public void log(final String pstrMessage, LOG_TYPE penmType);
-		
+		public void log(String pstrMessage, LOG_TYPE penmType) {
+			String header;
+			switch(penmType) {
+			case DEBUG:
+				header = LOG_TYPE.DEBUG.strVal;
+				break;
+			case ERROR:
+				header = LOG_TYPE.ERROR.strVal;
+				break;
+			case FATAL_ERROR:
+				header = LOG_TYPE.FATAL_ERROR.strVal;
+				break;
+			default:
+				header = LOG_TYPE.GRAL.strVal;
+			}
+			System.out.println(Utilities.getDataStampString()+" - "+header+pstrMessage);
+		}
 	}
 }

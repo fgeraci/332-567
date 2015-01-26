@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 
 import org.springframework.web.WebApplicationInitializer;
 
+import edu.rutgers.model.impl.DataManager;
 import edu.rutgers.util.ConfigReader;
 import edu.rutgers.util.ConfigReader.PROPERTIES;
 import edu.rutgers.util.LoggerFactory;
@@ -24,6 +25,7 @@ public class Initializer implements WebApplicationInitializer {
 				loggerType = LOGGER_TYPE.TEXT;
 			}
 			LoggerFactory.getLogger(loggerType);
+			DataManager.getInstance();
 		} catch (Exception e) { // temporary catch all for initializer 
 			System.out.println("FATAL ERROR: onStartup of Initializer");
 		}
