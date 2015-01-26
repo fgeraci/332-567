@@ -19,6 +19,7 @@ import edu.rutgers.util.LoggerFactory.Logger.LOG_TYPE;
 public class DataManager implements ModelManager {
 	
 	private Logger gLogger;
+	private static String gstrConnector;
 	private static String gstrConnection;
 	private static String gstrDBName;
 	private static String gstrDBUser;
@@ -34,18 +35,25 @@ public class DataManager implements ModelManager {
 		gLogger = LoggerFactory.getLogger(LOGGER_TYPE.CONSOLE);
 		ConfigReader configs = ConfigReader.getInstance();
 		Connection con = null;
+		gstrConnector = configs.getStr(PROPERTIES.DB_CONNECTOR);
 		gstrConnection = configs.getStr(PROPERTIES.DB_CONNECTION);
 		gstrDBName = configs.getStr(PROPERTIES.DB_NAME);
 		gstrDBUser = configs.getStr(PROPERTIES.DB_USER);
 		gstrDBPassword = configs.getStr(PROPERTIES.DB_PASSWORD);
-		gstrConnection = gstrConnection + File.separator + gstrDBName;
+		String fullConnection = gstrConnection + "/" + gstrDBName;
 		try {
-			Class.forName(gstrConnection);
-			con = DriverManager.getConnection(gstrConnection,gstrDBUser,gstrDBPassword);
+			Class.forName(gstrConnector);
+			con = DriverManager.getConnection(fullConnection,gstrDBUser,gstrDBPassword);
 		} catch (Exception e) {
-			gLogger.log("FAILED TO INITIALIZE DataManager", LOG_TYPE.FATAL_ERROR);
+			gLogger.log("FAILED TO INITIALIZE DataManager - "+e.getMessage(), LOG_TYPE.FATAL_ERROR);
 		} finally {
-			if(con != null) con.close();
+			if(con != null) {
+				con.close();
+				gLogger.log("DB Connection successfully tested and closed on startup", LOG_TYPE.DEBUG);
+			}
+			else {
+				gLogger.log("FAILED TO INITIALIZE DataManager", LOG_TYPE.FATAL_ERROR);
+			}
 		}
 	}
 	

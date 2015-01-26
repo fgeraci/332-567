@@ -7,6 +7,7 @@ public class ConfigReader {
 	public enum PROPERTIES {
 		
 		LOGGER("logger"),
+		DB_CONNECTOR("db_connector"),
 		DB_CONNECTION("db_connection"),
 		DB_NAME("db_name"),
 		DB_USER("db_user"),
@@ -47,6 +48,6 @@ public class ConfigReader {
 	 * @return String value of property
 	 */
 	public String getStr(final PROPERTIES penmProp) {
-		return gProperties.getProperty(PROPERTIES.LOGGER.strVal);
+		return gProperties.getProperty(penmProp.strVal);
 	}
 }
