@@ -7,6 +7,8 @@ package edu.rutgers.util;
 
 public class LoggerFactory {
 	
+	private static Logger instance;
+	
 	public enum LOGGER_TYPE {
 		CONSOLE,
 		TEXT;
@@ -20,12 +22,22 @@ public class LoggerFactory {
 	public static Logger getLogger(final LOGGER_TYPE penmLoggerType) {
 		switch(penmLoggerType) {
 		case CONSOLE:
-			return ConsoleLogger.getInstance();
+			LoggerFactory.instance = ConsoleLogger.getInstance();
+			return LoggerFactory.instance;
 		case TEXT:
-			return TextLogger.getInstance();
+			LoggerFactory.instance = TextLogger.getInstance();
+			return LoggerFactory.instance;
 		default:
 			return null;
 		}
+	}
+	
+	/**
+	 * If the logger was instantiated, then this will return the current application's logger, if not, null.
+	 * @return Logger or null
+	 */
+	public static Logger getInstance() {
+		return LoggerFactory.instance;
 	}
 	
 	/**

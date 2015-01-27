@@ -1,14 +1,12 @@
 package edu.rutgers.model.impl;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 import edu.rutgers.model.api.ModelManager;
 import edu.rutgers.util.ConfigReader;
-import edu.rutgers.util.LoggerFactory;
 import edu.rutgers.util.ConfigReader.PROPERTIES;
-import edu.rutgers.util.LoggerFactory.LOGGER_TYPE;
+import edu.rutgers.util.LoggerFactory;
 import edu.rutgers.util.LoggerFactory.Logger;
 import edu.rutgers.util.LoggerFactory.Logger.LOG_TYPE;
 
@@ -32,7 +30,7 @@ public class DataManager implements ModelManager {
 	private static DataManager instance;
 	
 	public void initializeManager() throws Exception {
-		gLogger = LoggerFactory.getLogger(LOGGER_TYPE.CONSOLE);
+		gLogger = LoggerFactory.getInstance();
 		ConfigReader configs = ConfigReader.getInstance();
 		Connection con = null;
 		gstrConnector = configs.getStr(PROPERTIES.DB_CONNECTOR);
