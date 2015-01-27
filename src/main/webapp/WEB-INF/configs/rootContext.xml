@@ -16,6 +16,16 @@
     <context:annotation-config />
     <context:component-scan base-package="edu.rutgers" />
     
+    <!-- This will resolve names passed in ModelAndView controller return methods -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix">
+    		<value>/WEB-INF/pages/</value>
+    	</property>
+    	<property name="suffix">
+    		<value>.jsp</value>
+    	</property>
+    </bean>
+    
     <!-- 
     <bean name="MyBean" class="org.webapp.beans.MyBean" />
      -->
