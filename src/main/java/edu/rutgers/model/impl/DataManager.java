@@ -5,14 +5,13 @@ import java.sql.DriverManager;
 
 import edu.rutgers.model.api.ModelManager;
 import edu.rutgers.util.ConfigReader;
-import edu.rutgers.util.ConfigReader.PROPERTIES;
 import edu.rutgers.util.LoggerFactory;
 import edu.rutgers.util.LoggerFactory.Logger;
-import edu.rutgers.util.LoggerFactory.Logger.LOG_TYPE;
+import edu.rutgers.util.enums.LOG_TYPE;
+import edu.rutgers.util.enums.PROPERTIES;
 
 /**
  * Singleton implementation of ModelManager for data read/write
- *
  */
 public class DataManager implements ModelManager {
 	

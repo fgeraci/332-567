@@ -2,22 +2,12 @@ package edu.rutgers.util;
 
 import java.util.Properties;
 
+import edu.rutgers.util.enums.PROPERTIES;
+
+/**
+ * Singleton class which provides cross-app access to app.properties configuration variables.
+ */
 public class ConfigReader {
-	
-	public enum PROPERTIES {
-		
-		LOGGER("logger"),
-		DB_CONNECTOR("db_connector"),
-		DB_CONNECTION("db_connection"),
-		DB_NAME("db_name"),
-		DB_USER("db_user"),
-		DB_PASSWORD("db_password");
-		
-		private String strVal;
-		private PROPERTIES(final String pstrVal) {
-			strVal = pstrVal;
-		}
-	}
 	
 	private final static String gPropsFile = "app.properties";
 	private static Properties gProperties;
@@ -48,6 +38,6 @@ public class ConfigReader {
 	 * @return String value of property
 	 */
 	public String getStr(final PROPERTIES penmProp) {
-		return gProperties.getProperty(penmProp.strVal);
+		return gProperties.getProperty(penmProp.toString());
 	}
 }

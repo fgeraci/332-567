@@ -3,6 +3,10 @@ package edu.rutgers.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Application wide static utility functions.
+ *
+ */
 public class Utilities {
 	
 	/**

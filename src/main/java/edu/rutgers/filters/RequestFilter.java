@@ -11,10 +11,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import edu.rutgers.util.LoggerFactory;
-import edu.rutgers.util.LoggerFactory.LOGGER_TYPE;
-import edu.rutgers.util.LoggerFactory.Logger.LOG_TYPE;
 import edu.rutgers.util.Utilities;
+import edu.rutgers.util.enums.LOGGER_TYPE;
+import edu.rutgers.util.enums.LOG_TYPE;
 
+/**
+ * Main applications filter which will be in charge of session and authentication handling.
+ *
+ */
 public class RequestFilter implements Filter {
 
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,8 +28,9 @@ public class RequestFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpReq = (HttpServletRequest) request;
 		LoggerFactory.getLogger(LOGGER_TYPE.CONSOLE).log(Utilities.getDataStampString()+
-				" - Filter: "+this+" - Session: "+((HttpServletRequest)request).getSession().getId(), LOG_TYPE.GRAL);
+				" - Filter: "+this+" - Session: "+httpReq.getSession().getId()+" - "+httpReq.getRequestURI(), LOG_TYPE.GRAL);
 		chain.doFilter(request, response);
 	}
 

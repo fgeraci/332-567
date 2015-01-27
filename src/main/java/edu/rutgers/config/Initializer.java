@@ -7,10 +7,15 @@ import org.springframework.web.WebApplicationInitializer;
 
 import edu.rutgers.model.impl.DataManager;
 import edu.rutgers.util.ConfigReader;
-import edu.rutgers.util.ConfigReader.PROPERTIES;
 import edu.rutgers.util.LoggerFactory;
-import edu.rutgers.util.LoggerFactory.LOGGER_TYPE;
+import edu.rutgers.util.enums.LOGGER_TYPE;
+import edu.rutgers.util.enums.PROPERTIES;
 
+/**
+ * Will run on app initialization in web container. Main objective is to instantiate all singletons which will provide facilities
+ * across the applications.
+ *
+ */
 public class Initializer implements WebApplicationInitializer {
 	
 	/**
